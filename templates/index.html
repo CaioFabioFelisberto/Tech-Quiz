@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Tech</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="quiz-card">
+            <div class="quiz-header">
+                <span class="quiz-eyebrow">Quiz Tech</span>
+                <h1>Desafio em andamento</h1>
+                <p>Responda com atenção e avance pela trilha de perguntas.</p>
+            </div>
+
+            {% if erro %}
+                <div class="alert alert-error">{{ erro }}</div>
+            {% endif %}
+
+            {% if questao %}
+                <div class="question-meta">Pergunta {{ questao.id }}</div>
+                <h2 class="question-title">{{ questao.pergunta }}</h2>
+
+                <form method="POST" class="quiz-form">
+                    <div class="options-grid">
+                        {% for opcao in questao.opcoes %}
+                            <label class="option-card" for="opcao-{{ loop.index }}">
+                                <input type="radio" id="opcao-{{ loop.index }}" name="resposta" value="{{ opcao }}" required>
+                                <span class="option-indicator"></span>
+                                <span class="option-text">{{ opcao }}</span>
+                            </label>
+                        {% endfor %}
+                    </div>
+
+                    <button type="submit" class="submit-button">Responder</button>
+                </form>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>                                 

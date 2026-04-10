@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='resultado.css') }}">
+</head>
+<body>
+    <main class="result-shell">
+        <section class="result-card">
+            <span class="result-badge">Fim do quiz</span>
+            <h1>{{ resultado }}</h1>
+            <p class="result-time">Tempo gasto: <span>{{ tempo_gasto }} s</span></p>
+            {% if erros is not none %}
+                <p class="result-summary">Total de erros: <strong>{{ erros }}</strong></p>
+            {% endif %}
+            {% if perguntas_erradas is not none %}
+                <div class="wrong-questions">
+                    <h2>Perguntas respondidas incorretamente</h2>
+                    <ul class="wrong-questions-list">
+                        {% for pergunta in perguntas_erradas %}
+                            <li>{{ pergunta }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <p>Dica: Tente novamente e reflita sobre a pergunta que você respondeu incorretamente.</p>
+        </section>
+    </main>
+</body>
+</html>
